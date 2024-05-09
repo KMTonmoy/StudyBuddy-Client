@@ -7,7 +7,7 @@ import Slide from './Side'
 
 const Banner = () => {
     return (
-        <div className='container px-2 rounded-2xl py-10 mx-auto'>
+        <div className='  container px-2 rounded-2xl py-10 mx-auto'>
             <Swiper
                 spaceBetween={30}
                 centeredSlides={true}

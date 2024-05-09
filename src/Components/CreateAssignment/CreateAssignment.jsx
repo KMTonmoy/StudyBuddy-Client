@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 const CreateAssignment = () => {
     const { user } = useContext(AuthContext)
 
-
+ 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [marks, setMarks] = useState('')
