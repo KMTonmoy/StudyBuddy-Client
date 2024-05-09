@@ -1,62 +1,95 @@
-import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../../providers/AuthProvider';
+import { useContext, useEffect, useState } from 'react'
 
+import { Link } from 'react-router-dom'
+import { AuthContext } from '../../providers/AuthProvider'
 const Navbar = () => {
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext)
+    const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem('theme') : "light")
 
+    const handleToggle = (e) => {
+        setTheme(e.target.checked ? "dark" : "light");
+
+    };
+
+
+    useEffect(() => {
+        localStorage.setItem("theme", theme);
+        document.querySelector("html").setAttribute("data-theme", theme);
+    }, [theme]);
     return (
-        <nav className="bg-gray-900">
-            <div className="container mx-auto px-6 py-3">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                        <Link to="/" className="text-white text-lg font-semibold">
-                            GroupGrid
-                        </Link>
-                    </div>
-                    <div className="flex items-center">
-                        <ul className="flex items-center">
-                            <li className="ml-6">
-                                <Link to="/assignments" className="text-gray-300 hover:text-white">Assignments</Link>
+        <div className='navbar bg-base-100 shadow-sm container px-4 mx-auto'>
+            <div className='flex-1'>
+                <Link to='/' className='capitalize flex gap-2 items-center'>
+                    <img className='w-[50px] rounded-full' src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsDrAoBLTtWUpakNVQwswakTQ2IKmS_x6IVUPK1oP65Q&s'} alt='' />
+                    <span className='font-bold'>GROUPGRID</span>
+                </Link>
+            </div>
+            <div className='flex-none'>
+                <ul className='menu menu-horizontal px-1'>
+                    <li>
+                        <Link className='capitalize' to='/'>Home</Link>
+                    </li>
+                    <li>
+                        <Link className='capitalize' to='/assignments'>assignments</Link>
+                    </li>
+                    <li>
+                        <Link className='capitalize' to='/create'>create assignment</Link>
+                    </li>
+                    <li>
+                        <Link className='capitalize' to='/pending'>pending assignments</Link>
+                    </li>
+
+                    {!user && (
+                        <li>
+                            <Link className='capitalize' to='/login'>Login</Link>
+                        </li>
+                    )}
+                </ul>
+
+                {user && (
+                    <div className='dropdown dropdown-end z-50'>
+                        <div
+                            tabIndex={0}
+                            role='button'
+                            className='btn btn-ghost btn-circle avatar'
+                        >
+                            <div title={user?.displayName} className='w-10 rounded-full'>
+                                <img
+                                    referrerPolicy='no-referrer'
+                                    alt='User Profile Photo'
+                                    src={user?.photoURL}
+                                />
+                            </div>
+                        </div>
+                        <ul
+                            tabIndex={0}
+                            className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
+                        >
+                            <li>
+                                <Link to='/attempted-assignments' className='justify-between capitalize'>
+                                    attempted assignments
+                                </Link>
                             </li>
-                            {!user ? (
-                                <>
-                                    <li className="ml-6">
-                                        <Link to="/login" className="text-gray-300 hover:text-white">Login</Link>
-                                    </li>
-                                    <li className="ml-6">
-                                        <Link to="/register" className="text-gray-300 hover:text-white">Register</Link>
-                                    </li>
-                                </>
-                            ) : (
-                                <>
-                                    <li className="ml-6">
-                                        <Link to="/create-assignment" className="text-gray-300 hover:text-white">Create Assignment</Link>
-                                    </li>
-                                    <li className="ml-6">
-                                        <Link to="/pending-assignments" className="text-gray-300 hover:text-white">Pending Assignments</Link>
-                                    </li>
-                                    <li className="ml-6 relative">
-                                        <button className="text-gray-300 hover:text-white focus:outline-none">
-                                            <img src={user.avatar} alt="User Avatar" className="h-8 w-8 rounded-full" />
-                                        </button>
-                                        <ul className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1">
-                                            <li>
-                                                <Link to="/my-attempted-assignments" className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">My Attempted Assignments</Link>
-                                            </li>
-                                            <li>
-                                                <button onClick={logOut} className="block w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 focus:outline-none">Logout</button>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </>
-                            )}
+
+                            <li className='mt-2'>
+                                <button
+                                    onClick={logOut}
+                                    className='w-full flex justify-center px-5 py-2 mt-4 text-sm font-medium text-white capitalize transition-colors duration-300 transform bg-gradient-to-r from-blue-500 to-purple-500 rounded-md lg:w-auto hover:from-blue-600 hover:to-purple-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'
+                                >
+                                    Logout
+                                </button>
+                            </li>
                         </ul>
                     </div>
-                </div>
+                )}
+
+          
             </div>
-        </nav>
-    );
+        </div>
+    )
 }
 
-export default Navbar;
+export default Navbar
+
+
+
