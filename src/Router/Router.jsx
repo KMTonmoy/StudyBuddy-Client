@@ -6,6 +6,9 @@ import CreateAssignment from "../Components/CreateAssignment/CreateAssignment";
 import PrivateRoute from "./PrivateRoute";
 import Register from "../Components/Authentication/Register";
 import AssignmentDetail from "../Components/Assignment/AssignmentDetail";
+import SubmitAssignment from "../Components/Assignment/SubmitAssignment";
+import AssignmentPage from "../Components/AssignmentPage/AssignmentPAge";
+
 
 
 const router = createBrowserRouter([
@@ -21,11 +24,6 @@ const router = createBrowserRouter([
                 path: "/login",
                 element: <Login />,
             },
-
-            {
-                path: "/assignments",
-                element: <Login />,
-            },
             {
                 path: "/registration",
                 element: <Register />,
@@ -38,6 +36,14 @@ const router = createBrowserRouter([
                 path: "/assignemt/:id",
                 element: <AssignmentDetail />,
                 loader: ({ params }) => fetch(`http://localhost:5000/assignemt/${params.id}`)
+            },
+            {
+                path: "/submit/:id",
+                element: <SubmitAssignment />,
+            },
+            {
+                path: "/assignments",
+                element: <AssignmentPage />,
             },
             {
                 path: "/pending",

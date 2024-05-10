@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const AssignmentDetail = () => {
-
-    const assignment = useLoaderData()
-
+    const assignment = useLoaderData();
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-8">
@@ -16,31 +14,34 @@ const AssignmentDetail = () => {
                     {/* Description */}
                     <div className="p-4">
                         <h3 className="text-xl font-semibold text-gray-700 mb-2">Description:</h3>
-                        <p className="text-gray-600">{assignment[0].description}</p>
+                        <p className="text-gray-600">{assignment?.description}</p>
                     </div>
 
                     {/* Marks */}
                     <div className="p-4 bg-gray-100">
                         <h3 className="text-xl font-semibold text-gray-700 mb-2">Marks:</h3>
-                        <p className="text-gray-600">{assignment[0].marks}</p>
+                        <p className="text-gray-600">{assignment?.marks}</p>
                     </div>
 
                     {/* Difficulty Level */}
                     <div className="p-4">
                         <h3 className="text-xl font-semibold text-gray-700 mb-2">Difficulty Level:</h3>
-                        <p className="text-gray-600">{assignment[0].difficultyLevel}</p>
+                        <p className="text-gray-600">{assignment?.difficultyLevel}</p>
                     </div>
 
                     {/* Due Date */}
                     <div className="p-4 bg-gray-100">
                         <h3 className="text-xl font-semibold text-gray-700 mb-2">Due Date:</h3>
-                        <p className="text-gray-600">{assignment[0].dueDate}</p>
+                        <p className="text-gray-600">{assignment?.dueDate}</p>
                     </div>
 
                     {/* Submission Form */}
                     <div className="p-4">
-                        <h3 className="text-xl font-semibold text-gray-700 mb-2">Submit Assignment:</h3>
-                        {/* Insert assignment submission form here... */}
+                        <Link to={`/submit/${assignment?._id}`}>
+                            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                Take Assignment
+                            </button>
+                        </Link>
                     </div>
                 </div>
             ) : (

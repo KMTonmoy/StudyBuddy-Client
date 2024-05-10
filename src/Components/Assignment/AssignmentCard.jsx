@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const AssignmentCard = ({ data }) => {
+
+
     return (
         <div className="capitalize bg-white rounded-lg overflow-hidden shadow-lg">
             {/* Thumbnail */}
@@ -33,13 +35,25 @@ const AssignmentCard = ({ data }) => {
                 </div>
             </div>
 
-            {/* Action Button */}
-            <div className="bg-gray-100 p-4 flex justify-end">
-                <Link to={`/assignemt/${data._id}`}>
-                    <button className="text-blue-500 hover:text-blue-700 font-semibold ">View Assignment</button>
 
+            <div className="bg-gray-100 p-4 flex justify-end">
+                {/* Update Button */}
+                <Link to={`/update/${data._id}`}>
+                    <button className="text-blue-500 hover:text-blue-700 font-semibold mr-2">Update</button>
+                </Link>
+
+                {/* Delete Button */}
+                <button className="text-red-500 hover:text-red-700 font-semibold">Delete</button>
+            </div>
+
+                // Normal View for other users
+            <div className="bg-gray-100 p-4 flex justify-end">
+                {/* View Assignment Button */}
+                <Link to={`/assignemt/${data._id}`}>
+                    <button className="text-blue-500 hover:text-blue-700 font-semibold">View Assignment</button>
                 </Link>
             </div>
+
         </div>
     );
 };
