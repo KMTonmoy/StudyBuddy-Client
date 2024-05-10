@@ -35,7 +35,7 @@ const CreateAssignment = () => {
             difficultyLevel,
             dueDate,
         }
-        fetch('http://localhost:5000/assignemt', {
+        fetch('http://localhost:5000/assignment', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -51,7 +51,7 @@ const CreateAssignment = () => {
                 );
                 console.log(data);
                 form.reset();
-                navigate('/my-assignment')
+                navigate('/assignments')
             })
             .catch(error => {
                 console.error('Error:', error);

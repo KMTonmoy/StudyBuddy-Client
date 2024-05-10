@@ -3,18 +3,29 @@ import { Link, useLoaderData } from 'react-router-dom';
 
 const AssignmentDetail = () => {
     const assignment = useLoaderData();
+    const [showFullDescription, setShowFullDescription] = useState(false);
+
+    // Function to toggle show more/less
+    const toggleDescription = () => {
+        setShowFullDescription(!showFullDescription);
+    };
 
     return (
-        <div className="max-w-4xl mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto px-4 py-8 capitalize">
             {assignment ? (
                 <div className="bg-white shadow-lg rounded-lg overflow-hidden">
                     {/* Title */}
-                    <h2 className="text-3xl font-bold text-gray-800 mb-4 bg-blue-500 text-white py-2 px-4">Assignment Details</h2>
+                    <h2 className="text-3xl font-bold  mb-4 bg-blue-500 text-white py-2 px-4">Assignment Details</h2>
 
                     {/* Description */}
                     <div className="p-4">
                         <h3 className="text-xl font-semibold text-gray-700 mb-2">Description:</h3>
-                        <p className="text-gray-600">{assignment?.description}</p>
+                        <p className="text-gray-600">
+                            {showFullDescription ? assignment?.description : `${assignment?.description.split(' ').slice(0, 50).join(' ')}`}
+                            <button onClick={toggleDescription} className="text-blue-500 hover:underline ml-3">
+                                {showFullDescription ? "Show Less" : "Show More...."}
+                            </button>
+                        </p>
                     </div>
 
                     {/* Marks */}
@@ -32,7 +43,7 @@ const AssignmentDetail = () => {
                     {/* Due Date */}
                     <div className="p-4 bg-gray-100">
                         <h3 className="text-xl font-semibold text-gray-700 mb-2">Due Date:</h3>
-                        <p className="text-gray-600">{assignment?.dueDate}</p>
+                        <p className="text-red-600">{assignment?.dueDate}</p>
                     </div>
 
                     {/* Submission Form */}

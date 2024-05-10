@@ -6,7 +6,7 @@ const Assignment = () => {
     const [datas, setDatas] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/assignemt`)
+        fetch(`http://localhost:5000/assignment`)
             .then(res => res.json())
             .then(data => setDatas(data));
     }, []);
