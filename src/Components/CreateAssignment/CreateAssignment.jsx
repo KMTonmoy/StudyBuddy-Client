@@ -1,12 +1,10 @@
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../providers/AuthProvider'
-import axios from 'axios'
-import toast from 'react-hot-toast'
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { FiEdit2, FiBookOpen, FiAward, FiCalendar, FiLink } from 'react-icons/fi'
-import Swal from 'sweetalert2'
-import { useNavigate } from 'react-router-dom'
 
 const CreateAssignment = () => {
     const { user } = useContext(AuthContext)
@@ -17,47 +15,48 @@ const CreateAssignment = () => {
     const [thumbnailURL, setThumbnailURL] = useState('')
     const [difficultyLevel, setDifficultyLevel] = useState('easy')
     const [dueDate, setDueDate] = useState(new Date())
+    const [error, setError] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const form = e.target;
-        const description = form.description.value
-        const marks = form.marks.value
-        const uid = form.uid.value
-        const thumbnailURL = form.thumbnailURL.value
-        const difficultyLevel = form.difficultyLevel.value
-        const dueDate = form.dueDate.value
+
+        // Check if the description has at least 40 words
+        const wordsCount = description.trim().split(/\s+/).length;
+        if (wordsCount < 40) {
+            setError('Description must have at least 40 words.');
+            return;
+        }
+
         const AddAssignment = {
+            title,
             description,
             marks,
-            uid,
+            uid: user?.uid,
             thumbnailURL,
             difficultyLevel,
             dueDate,
         }
+
         fetch('http://localhost:5000/assignment', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(AddAssignment)
         })
-            .then(res => res.json())
-            .then(data => {
+            .then(response => response.json())
+            .then(() => {
                 Swal.fire(
                     'Assignment Added',
                     'Your Assignment has been Added.',
                     'success'
                 );
-                console.log(data);
-                form.reset();
                 navigate('/assignments')
             })
             .catch(error => {
                 console.error('Error:', error);
             });
     }
-
 
     return (
         <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
@@ -66,7 +65,7 @@ const CreateAssignment = () => {
             </h1>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                    <label htmlFor="title" className=" text-sm font-medium text-gray-700 flex items-center">
+                    <label htmlFor="title" className="text-sm font-medium text-gray-700 flex items-center">
                         <FiBookOpen className="mr-2" /> Title
                     </label>
                     <input
@@ -79,20 +78,21 @@ const CreateAssignment = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="description" className=" text-sm font-medium text-gray-700 flex items-center">
+                    <label htmlFor="description" className="text-sm font-medium text-gray-700 flex items-center">
                         <FiEdit2 className="mr-2" /> Description
                     </label>
                     <textarea
                         name="description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        rows={3}
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-lg border-gray-300 rounded-md px-4 py-2 border-2"
+                        rows={5}
+                        className={`mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-lg border-gray-300 rounded-md px-4 py-2 border-2 ${error && 'shake'}`}
                         required
                     />
+                    {error && <p className="text-red-500 text-right">{error}</p>}
                 </div>
                 <div>
-                    <label htmlFor="marks" className=" text-sm font-medium text-gray-700 flex items-center">
+                    <label htmlFor="marks" className="text-sm font-medium text-gray-700 flex items-center">
                         <FiAward className="mr-2" /> Marks
                     </label>
                     <input
@@ -103,15 +103,9 @@ const CreateAssignment = () => {
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-lg border-gray-300 rounded-md px-4 py-2 border-2"
                         required
                     />
-                    <input
-                        type='text'
-                        defaultValue={user?.uid}
-                        className='hidden'
-                        name='uid'
-                    />
                 </div>
                 <div>
-                    <label htmlFor="thumbnailURL" className=" text-sm font-medium text-gray-700 flex items-center">
+                    <label htmlFor="thumbnailURL" className="text-sm font-medium text-gray-700 flex items-center">
                         <FiLink className="mr-2" /> Thumbnail URL
                     </label>
                     <input
@@ -124,7 +118,7 @@ const CreateAssignment = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="difficultyLevel" className=" text-sm font-medium text-gray-700 flex items-center">
+                    <label htmlFor="difficultyLevel" className="text-sm font-medium text-gray-700 flex items-center">
                         <FiEdit2 className="mr-2" /> Difficulty Level
                     </label>
                     <select
@@ -140,7 +134,7 @@ const CreateAssignment = () => {
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="dueDate" className=" text-sm font-medium text-gray-700 flex items-center">
+                    <label htmlFor="dueDate" className="text-sm font-medium text-gray-700 flex items-center">
                         <FiCalendar className="mr-2" /> Due Date
                     </label>
                     <DatePicker
