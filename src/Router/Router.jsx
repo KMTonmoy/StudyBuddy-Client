@@ -5,6 +5,7 @@ import Login from "../Components/Authentication/Login";
 import CreateAssignment from "../Components/CreateAssignment/CreateAssignment";
 import PrivateRoute from "./PrivateRoute";
 import Register from "../Components/Authentication/Register";
+import AssignmentDetail from "../Components/Assignment/AssignmentDetail";
 
 
 const router = createBrowserRouter([
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
             {
                 path: "/create",
                 element: <PrivateRoute><CreateAssignment /></PrivateRoute>,
+            },
+            {
+                path: "/assignemt/:id",
+                element: <AssignmentDetail />,
+                loader: ({ params }) => fetch(`http://localhost:5000/assignemt/${params.id}`)
             },
             {
                 path: "/pending",
