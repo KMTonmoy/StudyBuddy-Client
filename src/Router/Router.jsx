@@ -3,6 +3,9 @@ import Layout from "../Layout/Layout";
 import Home from "../Components/Home/Home";
 import Login from "../Components/Authentication/Login";
 import CreateAssignment from "../Components/CreateAssignment/CreateAssignment";
+import PrivateRoute from "./PrivateRoute";
+import Register from "../Components/Authentication/Register";
+
 
 const router = createBrowserRouter([
     {
@@ -23,8 +26,12 @@ const router = createBrowserRouter([
                 element: <Login />,
             },
             {
+                path: "/registration",
+                element: <Register />,
+            },
+            {
                 path: "/create",
-                element: <CreateAssignment />,
+                element: <PrivateRoute><CreateAssignment /></PrivateRoute>,
             },
             {
                 path: "/pending",

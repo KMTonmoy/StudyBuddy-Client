@@ -6,10 +6,11 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { FiEdit2, FiBookOpen, FiAward, FiCalendar, FiLink } from 'react-icons/fi'
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 
 const CreateAssignment = () => {
     const { user } = useContext(AuthContext)
-
+    const navigate = useNavigate()
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [marks, setMarks] = useState('')
@@ -50,6 +51,7 @@ const CreateAssignment = () => {
                 );
                 console.log(data);
                 form.reset();
+                navigate('/my-assignment')
             })
             .catch(error => {
                 console.error('Error:', error);
