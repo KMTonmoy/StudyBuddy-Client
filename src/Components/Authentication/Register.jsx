@@ -35,7 +35,7 @@ const Register = () => {
   return (
     <div className='flex justify-center items-center min-h-screen'>
       <div className='flex flex-col-reverse w-full max-w-3xl mx-auto overflow-hidden bg-white rounded-lg shadow-lg lg:flex-row lg:max-w-4xl'>
-        <form onSubmit={handleRegister} className='w-full px-6 py-8 md:px-8 lg:w-1/2'>
+        <form onSubmit={handleRegister} className='w-full px-6 py-8 md:px-8 lg:w-1/2'> 
           <h2 className='text-3xl font-bold text-center text-gray-800 mb-4'>Sign Up</h2>
           <div className='mb-4'>
             <label htmlFor='name' className='block text-lg font-medium text-gray-700'>
