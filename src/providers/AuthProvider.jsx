@@ -45,12 +45,7 @@ const AuthProvider = ({ children }) => {
     return signOut(auth)
   }
 
-  const updateUserProfile = (name, photo) => {
-    return updateProfile(auth.currentUser, {
-      displayName: name,
-      photoURL: photo,
-    })
-  }
+   
 
   // onAuthStateChange
   useEffect(() => {
@@ -73,7 +68,7 @@ const AuthProvider = ({ children }) => {
     signIn,
     signInWithGoogle,
     logOut,
-    updateUserProfile,
+ 
   }
 
   return (

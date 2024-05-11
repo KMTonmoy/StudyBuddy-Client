@@ -87,7 +87,7 @@ const Login = () => {
                 />
                 <button
                   type='button'
-                  className='mt-8 md:mt-0 absolute inset-y-0 right-0 flex items-center justify-center p-2 focus:outline-none'
+                  className=' absolute inset-y-0 right-0 flex items-center justify-center p-2 mt-8 focus:outline-none'
                   onClick={togglePasswordVisibility}
                 >
                   {showPassword ? (

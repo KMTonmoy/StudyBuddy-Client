@@ -22,8 +22,8 @@ const CreateAssignment = () => {
 
         // Check if the description has at least 40 words
         const wordsCount = description.trim().split(/\s+/).length;
-        if (wordsCount < 40) {
-            setError('Description must have at least 40 words.');
+        if (wordsCount < 20) {
+            setError('Description must have at least 20 words.');
             return;
         }
 

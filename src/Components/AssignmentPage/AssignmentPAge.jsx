@@ -4,16 +4,19 @@ import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
+
 const AssignmentPage = () => {
-    const { user, loading } = useContext(AuthContext);
+    const { user, loading, setLoading } = useContext(AuthContext);
     const [difficultyFilter, setDifficultyFilter] = useState('All');
     const [assignments, setAssignments] = useState([]);
+
 
     useEffect(() => {
         const fetchAssignments = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/assignment');
                 setAssignments(response.data);
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching assignments:', error);
             }
@@ -48,7 +51,7 @@ const AssignmentPage = () => {
             return (
                 <>
                     <p className="text-gray-600">{truncatedDescription}</p>
-                    <Link to={`/assignment/${assignment._id}`} className="text-blue-500 hover:underline">Show More</Link>
+                    <Link to={`/assignment/${assignment._id}`} className="text-blue-500 hover:underline">Show Details</Link>
                 </>
             );
         }
@@ -63,19 +66,19 @@ const AssignmentPage = () => {
         const month = date.toLocaleString('default', { month: 'short' });
         const year = date.getFullYear();
         const fdate = date.getDate();
-        return `M: ${month} Y: ${year} d: ${fdate}`;
+        return `  ${month}, ${fdate}, ${year} `;
     };
 
     return (
         <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center my-20">Assignments</h2>
-            <div className="flex mb-20 items-center justify-center mb-4">
-                <label htmlFor="difficultyFilter" className="mr-2">Filter by Difficulty Level:</label>
+            <div className="flex mb-20 items-center justify-center  ">
+                <label htmlFor="difficultyFilter" className="mr-2 text-xl font-semibold">Filter by Difficulty Level:</label>
                 <select
                     id="difficultyFilter"
                     value={difficultyFilter}
                     onChange={handleFilterChange}
-                    className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
+                    className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none bg-green-600 text-white font-bold focus:border-blue-500"
                 >
                     <option value="All">All</option>
                     <option value="Easy">Easy</option>
@@ -83,45 +86,56 @@ const AssignmentPage = () => {
                     <option value="Hard">Hard</option>
                 </select>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {assignments
-                    .filter(assignment => difficultyFilter === 'All' || assignment.difficultyLevel.toLowerCase() === difficultyFilter.toLowerCase())
-                    .map(assignment => (
-                        <div key={assignment._id} className="capitalize bg-white rounded-lg overflow-hidden shadow-lg">
-                            <img src={assignment.thumbnailURL} alt={assignment.title} className="w-full h-64 object-cover" />
-                            <div className="p-6">
-                                <h2 className="text-xl font-semibold text-gray-800 mb-2">{assignment.title}</h2>
-                                {renderDescription(assignment)}
-                                <div className="flex items-center mt-4">
-                                    <span className="text-gray-500">Marks:</span>
-                                    <span className="ml-2 text-blue-500 font-semibold">{assignment.marks}</span>
-                                </div>
-                                <div className="flex items-center mt-2">
-                                    <span className="text-gray-500">Difficulty:</span>
-                                    <span className="ml-2 text-blue-500 font-semibold">{assignment.difficultyLevel}</span>
-                                </div>
-                                <div className="flex items-center mt-2">
-                                    <span className="text-gray-500">Due Date:</span>
-                                    <span className="ml-2 text-blue-500 font-semibold">{formatDueDate(assignment.dueDate)}</span>
-                                </div>
-                                {user && user.uid === assignment.uid ? (
-                                    <div className="bg-gray-100 p-4 flex justify-end">
-                                        <Link to={`/update/${assignment._id}`}>
-                                            <button className="text-blue-500 hover:text-blue-700 font-semibold mr-2">Update</button>
-                                        </Link>
-                                        <button onClick={() => handleDelete(assignment._id)} className="text-red-500 hover:text-red-700 font-semibold">Delete</button>
+            {loading ? (
+                <div className='flex justify-center items-center text-center'>
+                    <span className="loading loading-bars loading-lg  text-[#1D4EDE]"></span>
+
+                </div>
+            ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {assignments.length > 0 ? (
+                        assignments
+                            .filter(assignment => difficultyFilter === 'All' || assignment.difficultyLevel.toLowerCase() === difficultyFilter.toLowerCase())
+                            .map(assignment => (
+                                <div key={assignment._id} className="capitalize bg-white rounded-lg overflow-hidden shadow-lg">
+                                    <img src={assignment.thumbnailURL} alt={assignment.title} className="w-full h-64 object-cover" />
+                                    <div className="p-6">
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-2">{assignment.title}</h2>
+                                        {renderDescription(assignment)}
+                                        <div className="flex items-center mt-4">
+                                            <span className="text-gray-500">Marks:</span>
+                                            <span className="ml-2 text-blue-500 font-semibold">{assignment.marks}</span>
+                                        </div>
+                                        <div className="flex items-center mt-2">
+                                            <span className="text-gray-500">Difficulty:</span>
+                                            <span className="ml-2 text-blue-500 font-semibold">{assignment.difficultyLevel}</span>
+                                        </div>
+                                        <div className="flex items-center mt-2">
+                                            <span className="text-gray-500">Due Date:</span>
+                                            <span className="ml-2 text-blue-500 font-semibold">{formatDueDate(assignment.dueDate)}</span>
+                                        </div>
+                                        {user && user.uid === assignment.uid ? (
+                                            <div className="bg-gray-100 p-4 flex justify-end">
+                                                <Link to={`/update/${assignment._id}`}>
+                                                    <button className="text-blue-500 hover:text-blue-700 font-semibold mr-2">Update</button>
+                                                </Link>
+                                                <button onClick={() => handleDelete(assignment._id)} className="text-red-500 hover:text-red-700 font-semibold">Delete</button>
+                                            </div>
+                                        ) : (
+                                            <div className="bg-gray-100 p-4 flex justify-end">
+                                                <Link to={`/assignment/${assignment._id}`}>
+                                                    <button className="text-blue-500 hover:text-blue-700 font-semibold">View Assignment</button>
+                                                </Link>
+                                            </div>
+                                        )}
                                     </div>
-                                ) : (
-                                    <div className="bg-gray-100 p-4 flex justify-end">
-                                        <Link to={`/assignment/${assignment._id}`}>
-                                            <button className="text-blue-500 hover:text-blue-700 font-semibold">View Assignment</button>
-                                        </Link>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    ))}
-            </div>
+                                </div>
+                            ))
+                    ) : (
+                        <p className="text-center text-gray-600">No assignments available.</p>
+                    )}
+                </div>
+            )}
         </div>
     );
 };

@@ -18,7 +18,8 @@ const SubmitAssignment = () => {
         const mark = data.marks;
         const title = data.title;
         const description = data.description;
-        const name = data.displayName;
+        const thumbnail = data.thumbnailURL;
+        const name = user?.displayName;
 
 
         const submitData = {
@@ -27,6 +28,8 @@ const SubmitAssignment = () => {
             mark,
             title,
             description,
+            name,
+            thumbnail
         };
 
         // Make API request to submit assignment data
@@ -41,19 +44,19 @@ const SubmitAssignment = () => {
             .then(() => {
                 // Show success notification
                 Swal.fire(
-                    'Assignment Added',
-                    'Your Assignment has been Added.',
+                    'Assignment Submited',
+                    'Your Assignment has been Submited.',
                     'success'
                 );
                 console.log(submitData)
-
+                form.reset()
             })
             .catch(error => {
                 console.error('Error:', error);
             });
     };
 
-    console.log(user)
+    // console.log(user.displayName)
 
 
     return (

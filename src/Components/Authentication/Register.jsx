@@ -2,15 +2,24 @@ import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import toast from 'react-hot-toast';
+import { ToastContainer } from 'react-toastify';
+import { updateProfile } from 'firebase/auth';
+import Swal from 'sweetalert2';
 
 const Register = () => {
   const navigate = useNavigate();
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  const notify = () => toast("Register Success Fully");
+
+
+
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -21,21 +30,37 @@ const Register = () => {
     const imageUrl = form.imageUrl.value;
 
     try {
+      if (!/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(password)) {
+        throw new Error("Password must have at least 6 characters, one uppercase, and one lowercase letter.");
+      }
+
       const result = await createUser(email, password, name, imageUrl);
       const loggedUser = result.user;
-      console.log(loggedUser);
+      toast.success("User created successfully.");
+
+      updateProfile(loggedUser, {
+        displayName: name,
+        photoURL: imageUrl
+      });
+      notify()
       setTimeout(() => {
         navigate('/');
       }, 5000);
-    } catch (err) {
-      console.error(err);
+
+
+    } catch (error) {
+      Swal.fire(
+        'Error',
+        `${error}`,
+        'Error'
+      );
     }
   };
 
   return (
     <div className='flex justify-center items-center min-h-screen'>
       <div className='flex flex-col-reverse w-full max-w-3xl mx-auto overflow-hidden bg-white rounded-lg shadow-lg lg:flex-row lg:max-w-4xl'>
-        <form onSubmit={handleRegister} className='w-full px-6 py-8 md:px-8 lg:w-1/2'> 
+        <form onSubmit={handleRegister} className='w-full px-6 py-8 md:px-8 lg:w-1/2'>
           <h2 className='text-3xl font-bold text-center text-gray-800 mb-4'>Sign Up</h2>
           <div className='mb-4'>
             <label htmlFor='name' className='block text-lg font-medium text-gray-700'>
@@ -78,7 +103,7 @@ const Register = () => {
               />
               <button
                 type='button'
-                className='absolute inset-y-0 right-0 flex items-center justify-center p-2 focus:outline-none'
+                className='absolute inset-y-0 right-0 flex items-center justify-center p-2 mt-8 focus:outline-none'
                 onClick={togglePasswordVisibility}
               >
                 {showPassword ? (
@@ -97,7 +122,7 @@ const Register = () => {
               id='imageUrl'
               autoComplete='url'
               name='imageUrl'
-              type='url'
+              type='text'
               required
               className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-lg border-gray-300 rounded-md h-12 px-4'
             />
@@ -122,6 +147,7 @@ const Register = () => {
           alt='Register Image'
         />
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };
