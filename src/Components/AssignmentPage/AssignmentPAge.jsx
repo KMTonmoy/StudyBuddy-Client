@@ -58,6 +58,14 @@ const AssignmentPage = () => {
         setDifficultyFilter(e.target.value);
     };
 
+    const formatDueDate = (dueDate) => {
+        const date = new Date(dueDate);
+        const month = date.toLocaleString('default', { month: 'short' });
+        const year = date.getFullYear();
+        const fdate = date.getDate();
+        return `M: ${month} Y: ${year} d: ${fdate}`;
+    };
+
     return (
         <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center my-20">Assignments</h2>
@@ -94,7 +102,7 @@ const AssignmentPage = () => {
                                 </div>
                                 <div className="flex items-center mt-2">
                                     <span className="text-gray-500">Due Date:</span>
-                                    <span className="ml-2 text-blue-500 font-semibold">{assignment.dueDate}</span>
+                                    <span className="ml-2 text-blue-500 font-semibold">{formatDueDate(assignment.dueDate)}</span>
                                 </div>
                                 {user && user.uid === assignment.uid ? (
                                     <div className="bg-gray-100 p-4 flex justify-end">

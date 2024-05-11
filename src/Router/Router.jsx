@@ -9,7 +9,7 @@ import AssignmentDetail from "../Components/Assignment/AssignmentDetail";
 import SubmitAssignment from "../Components/Assignment/SubmitAssignment";
 import AssignmentPage from "../Components/AssignmentPage/AssignmentPAge";
 import Pending from "../Components/Pending/Pending";
-import Submit from "../Components/SubmitAssignment/Submit";
+
 
 
 
@@ -42,10 +42,11 @@ const router = createBrowserRouter([
             {
                 path: "/submit/:id",
                 element: <SubmitAssignment />,
+                loader: ({ params }) => fetch(`http://localhost:5000/assignment/${params.id}`)
             },
             {
                 path: "/submit",
-                element: <Submit />,
+                element: <Pending></Pending>,
             },
             {
                 path: "/assignments",
