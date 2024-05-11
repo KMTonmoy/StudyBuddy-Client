@@ -9,6 +9,12 @@ const AssignmentCard = ({ data }) => {
         setShowFullDescription(!showFullDescription);
     };
 
+    const formattedDueDate = new Date(data.dueDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+
     return (
         <div className="capitalize bg-white rounded-lg overflow-hidden shadow-lg">
             <img src={data.thumbnailURL} alt={data.title} className="w-full h-64 object-cover" />
@@ -35,15 +41,13 @@ const AssignmentCard = ({ data }) => {
 
                 <div className="flex items-center mt-2">
                     <span className="text-gray-500">Due Date:</span>
-                    <span className="ml-2 text-blue-500 font-semibold">{data.dueDate}</span>
+                    <span className="ml-2 text-blue-500 font-semibold">{formattedDueDate}</span>
                 </div>
             </div>
 
-
-
-            <div className="bg-gray-100 p-4 flex justify-end">
+            <div className=" bg-gray-100 p-4 flex justify-end">
                 <Link to={`/assignment/${data._id}`}>
-                    <button className="text-blue-500 hover:text-blue-700 font-semibold focus:outline-none">View Details</button>
+                    <button className="text-blue-500 hover:text-blue-700 font-semibold focus:outline-none">View Assignment</button>
                 </Link>
             </div>
         </div>
