@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link, useLoaderData } from 'react-router-dom';
 
 const AssignmentDetail = () => {
@@ -12,6 +13,9 @@ const AssignmentDetail = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-8 capitalize">
+            <Helmet>
+                <title>GroupGrid | Assignment Detail</title>
+            </Helmet>
             {assignment ? (
                 <div className="bg-white shadow-lg rounded-lg overflow-hidden">
                     {/* Title */}

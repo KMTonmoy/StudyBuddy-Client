@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { FiEdit2, FiBookOpen, FiAward, FiCalendar, FiLink } from 'react-icons/fi'
+import { Helmet } from 'react-helmet'
 
 const CreateAssignment = () => {
     const { user } = useContext(AuthContext)
@@ -60,6 +61,9 @@ const CreateAssignment = () => {
 
     return (
         <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
+            <Helmet>
+                <title>GroupGrid | Create Assignment</title>
+            </Helmet>
             <h1 className="text-2xl font-bold mb-4 flex items-center">
                 <FiEdit2 className="mr-2" /> Create New Assignment
             </h1>

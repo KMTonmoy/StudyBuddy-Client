@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Pending = () => {
     const { user } = useContext(AuthContext);
@@ -27,7 +28,9 @@ const Pending = () => {
 
     return (
         <div>
-
+            <Helmet>
+                <title>GroupGrid | Pending</title>
+            </Helmet>
             {user && isAssignmentSubmitted() ? (
                 <div className='grid gap-5 grid-cols-1 md:grid-cols-3'>
                     {submissions.map(data => (

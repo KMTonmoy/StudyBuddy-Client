@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import { FiStar, FiMessageSquare, FiCheckCircle } from 'react-icons/fi';
 import { useLoaderData } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -45,7 +46,9 @@ const GiveMark = () => {
 
     return (
         <div className=" mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
-
+            <Helmet>
+                <title>GroupGrid | GiveMark</title>
+            </Helmet>
             <div className="my-10 p-6 bg-white shadow-2xl rounded-md">
                 <p className="text-center font-bold text-xl mb-4">Student Submitted</p>
                 <div>

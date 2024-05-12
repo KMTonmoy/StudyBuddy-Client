@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
+import { Helmet } from 'react-helmet';
 
 const MySubmitted = () => {
     const { user } = useContext(AuthContext);
@@ -44,6 +45,9 @@ const MySubmitted = () => {
 
     return (
         <div className="container mx-auto mt-8">
+            <Helmet>
+                <title>GroupGrid | MySubmited</title>
+            </Helmet>
             <h2 className="text-3xl font-semibold text-center mb-4">My Submitted Assignments</h2>
             {user && isAssignmentSubmitted() ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

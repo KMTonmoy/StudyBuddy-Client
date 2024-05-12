@@ -4,10 +4,14 @@ import Feature from '../Feature/Feature';
 import FAQ from '../Faq/FAQ';
 import Assignment from '../Assignment/Assignment';
 import Testimonials from '../Testimonials/Testimonial';
+import { Helmet } from 'react-helmet';
 
 const Home = () => {
     return (
         <div>
+            <Helmet>
+                <title>GroupGrid | Home</title>
+            </Helmet>
             <Banner></Banner>
             <Feature></Feature>
             <Assignment></Assignment>

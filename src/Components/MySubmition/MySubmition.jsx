@@ -1,10 +1,14 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { useLoaderData } from 'react-router-dom';
 
 const MySubmition = () => {
     const data = useLoaderData()
     return (
         <div>
+            <Helmet>
+                <title>GroupGrid | My Submition</title>
+            </Helmet>
             <div className="max-w-lg mx-auto mt-[100px]">
                 <div className="bg-white rounded-lg shadow-md overflow-hidden">
                     <div className="bg-blue-500 text-white py-4 px-6">

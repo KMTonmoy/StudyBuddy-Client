@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 
 const AssignmentPage = () => {
@@ -50,6 +51,9 @@ const AssignmentPage = () => {
             const truncatedDescription = words.slice(0, maxWordsToShow).join(' ');
             return (
                 <>
+                    <Helmet>
+                        <title>GroupGrid | All Assignment</title>
+                    </Helmet>
                     <p className="text-gray-600">{truncatedDescription}</p>
                     <Link to={`/assignment/${assignment._id}`} className="text-blue-500 hover:underline">Show Details</Link>
                 </>
