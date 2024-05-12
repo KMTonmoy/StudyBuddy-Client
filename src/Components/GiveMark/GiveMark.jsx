@@ -4,26 +4,24 @@ import Swal from 'sweetalert2';
 
 const GiveMark = () => {
     const data = useLoaderData();
-    console.log(data._id)
+
     const handleSubmit = (e) => {
+
         e.preventDefault();
-        const form = e.target;
-        const result = form.result.value;
-        const feedback = form.feedback.value;
-        const updateAssignment = {
+        const form = e.target
+        const result = form.result.value
+        const feedback = form.feedback.value
+        const giveMark = {
             result: result,
             feedback: feedback
-        };
-
-        console.log(updateAssignment);
-
+        }
 
         fetch(`http://localhost:5000/submited/${data._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(updateAssignment)
+            body: JSON.stringify(giveMark)
         })
 
             .then(res => res.json())
@@ -38,6 +36,10 @@ const GiveMark = () => {
                     });
                 }
             });
+
+
+        console.log(giveMark);
+
 
     };
 
@@ -66,8 +68,7 @@ const GiveMark = () => {
                         <FiStar className="mr-2" /> Marks
                     </label>
                     <input
-                        type="number"
-                        id="marks"
+                        type="text"
                         name="result"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-lg border-gray-300 rounded-md px-4 py-2 border-2"
                         required

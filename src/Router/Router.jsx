@@ -50,7 +50,7 @@ const router = createBrowserRouter([
             {
                 path: "/giveMark/:id",
                 element: <PrivateRoute><GiveMark /></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/submited/663fa0a04e54b8ded2f680fc`)
+                loader: ({ params }) => fetch(`http://localhost:5000/submited/${params.id}`)
             },
 
             {
