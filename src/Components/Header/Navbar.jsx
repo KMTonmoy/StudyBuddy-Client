@@ -17,7 +17,13 @@ const Navbar = () => {
         document.querySelector("html").setAttribute("data-theme", theme);
     }, [theme]);
 
-
+    const handleLogout = () => {
+        if (logOut) {
+            logOut();
+        } else {
+            console.error("Logout function is not provided by AuthContext.");
+        }
+    };
 
     return (
         <div>
@@ -104,8 +110,9 @@ const Navbar = () => {
                                 </li>
 
                                 <li className='mt-2'>
+                                    
                                     <button
-                                        onClick={logOut}
+                                        onClick={handleLogout}
                                         className='w-full flex justify-center px-5 py-2 mt-4 text-sm font-medium text-white capitalize transition-colors duration-300 transform bg-gradient-to-r from-blue-500 to-purple-500 rounded-md lg:w-auto hover:from-blue-600 hover:to-purple-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'
                                     >
                                         Logout

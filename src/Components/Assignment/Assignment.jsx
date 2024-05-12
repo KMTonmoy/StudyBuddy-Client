@@ -6,7 +6,7 @@ const Assignment = () => {
     const [datas, setDatas] = useState([]);
     const [difficultyFilter, setDifficultyFilter] = useState('All');
     useEffect(() => {
-        fetch(`http://localhost:5000/assignment`)
+        fetch(`https://group-grid-server.vercel.app/assignment`)
             .then(res => res.json())
             .then(data => setDatas(data));
     }, []);

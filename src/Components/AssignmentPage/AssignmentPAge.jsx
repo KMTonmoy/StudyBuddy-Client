@@ -14,7 +14,7 @@ const AssignmentPage = () => {
     useEffect(() => {
         const fetchAssignments = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/assignment');
+                const response = await axios.get('https://group-grid-server.vercel.app/assignment');
                 setAssignments(response.data);
                 setLoading(false);
             } catch (error) {
@@ -26,7 +26,7 @@ const AssignmentPage = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:5000/assignment/${id}`);
+            const response = await axios.delete(`https://group-grid-server.vercel.app/assignment/${id}`);
             if (response.status === 200) {
                 setAssignments(assignments.filter(assignment => assignment._id !== id));
                 Swal.fire(

@@ -41,17 +41,17 @@ const router = createBrowserRouter([
             {
                 path: "/assignment/:id",
                 element: <PrivateRoute><AssignmentDetail /></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/assignment/${params.id}`)
+                loader: ({ params }) => fetch(`https://group-grid-server.vercel.app/assignment/${params.id}`)
             },
             {
                 path: "/submit/:id",
                 element: <PrivateRoute><SubmitAssignment /></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/assignment/${params.id}`)
+                loader: ({ params }) => fetch(`https://group-grid-server.vercel.app/assignment/${params.id}`)
             },
             {
                 path: "/mysubmition/:id",
                 element: <PrivateRoute><MySubmition /></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/submited/${params.id}`)
+                loader: ({ params }) => fetch(`https://group-grid-server.vercel.app/submited/${params.id}`)
             },
             {
                 path: "attempted-assignments",
@@ -65,13 +65,13 @@ const router = createBrowserRouter([
             {
                 path: "/giveMark/:id",
                 element: <PrivateRoute><GiveMark /></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/submited/${params.id}`)
+                loader: ({ params }) => fetch(`https://group-grid-server.vercel.app/submited/${params.id}`)
             },
 
             {
                 path: "/update/:id",
                 element: <PrivateRoute><UpdateAssignment /></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/assignment/${params.id}`)
+                loader: ({ params }) => fetch(`https://group-grid-server.vercel.app/assignment/${params.id}`)
             },
             {
                 path: "/submit",

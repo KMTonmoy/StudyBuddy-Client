@@ -8,14 +8,14 @@ const Pending = () => {
     const [assignments, setAssignments] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/submited')
+        fetch('https://group-grid-server.vercel.app/submited')
             .then(res => res.json())
             .then(data => setSubmissions(data))
             .catch(error => console.error('Error fetching submitted data:', error));
 
     }, []);
     useEffect(() => {
-        fetch('http://localhost:5000/assignment')
+        fetch('https://group-grid-server.vercel.app/assignment')
             .then(res => res.json())
             .then(data => setAssignments(data))
             .catch(error => console.error('Error fetching assignments:', error));

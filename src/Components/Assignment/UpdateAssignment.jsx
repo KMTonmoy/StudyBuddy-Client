@@ -38,7 +38,7 @@ const UpdateAssignment = () => {
         console.log(updateAssignment);
 
 
-        fetch(`http://localhost:5000/assignment/${_id}`, {
+        fetch(`https://group-grid-server.vercel.app/assignment/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

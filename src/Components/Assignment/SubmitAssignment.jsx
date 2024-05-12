@@ -35,7 +35,7 @@ const SubmitAssignment = () => {
         };
 
         // Make API request to submit assignment data
-        fetch('http://localhost:5000/submited', {
+        fetch('https://group-grid-server.vercel.app/submited', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

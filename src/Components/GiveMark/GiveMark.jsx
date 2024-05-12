@@ -16,7 +16,7 @@ const GiveMark = () => {
             feedback: feedback
         }
 
-        fetch(`http://localhost:5000/submited/${data._id}`, {
+        fetch(`https://group-grid-server.vercel.app/submited/${data._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

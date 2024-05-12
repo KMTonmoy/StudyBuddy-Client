@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
- 
+
 } from 'firebase/auth'
 import { app } from '../firebase/firebase.config'
 import axios from 'axios'
@@ -38,14 +38,10 @@ const AuthProvider = ({ children }) => {
 
   const logOut = async () => {
     setLoading(true)
-    const { data } = await axios(`http://localhost:5000/logout`, {
-      withCredentials: true,
-    })
-    console.log(data)
     return signOut(auth)
   }
 
-   
+
 
   // onAuthStateChange
   useEffect(() => {
@@ -68,7 +64,7 @@ const AuthProvider = ({ children }) => {
     signIn,
     signInWithGoogle,
     logOut,
- 
+
   }
 
   return (

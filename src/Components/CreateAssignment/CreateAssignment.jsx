@@ -37,7 +37,7 @@ const CreateAssignment = () => {
             dueDate,
         }
 
-        fetch('http://localhost:5000/assignment', {
+        fetch('https://group-grid-server.vercel.app/assignment', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
