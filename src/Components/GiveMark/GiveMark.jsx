@@ -48,12 +48,23 @@ const GiveMark = () => {
 
             <div className="my-10 p-6 bg-white shadow-2xl rounded-md">
                 <p className="text-center font-bold text-xl mb-4">Student Submitted</p>
-                <div className="mb-2">
-                    <p className="text-xl font-medium text-gray-700">PDF/DOC LINK: {data.pdfLink}</p>
+                <div>
+                    <label htmlFor="pdfLink" className="block text-gray-700 text-sm font-semibold mb-2">
+                        PDF Preview:
+                    </label>
+                    <iframe
+                        title="PDF Preview"
+                        src={data.pdfLink}
+                        className="w-full h-64 border border-gray-300 rounded-md"
+                        type='application/pdf'
+                    ></iframe>
+                </div>
+                <div className="mb-2 mt-5">
+                    <p className="text-base font-medium text-gray-700">PDF/DOC LINK: <a className='text-blue-400' href={data.pdfLink}>{data.pdfLink}</a></p>
 
                 </div>
                 <div>
-                    <p className="text-xl font-medium text-gray-700">Additional Notes: {data.additionalNotes}</p>
+                    <p className="text-base mt-5 font-medium text-gray-700">Additional Notes: {data.additionalNotes}</p>
                 </div>
 
             </div>

@@ -32,7 +32,10 @@ const MySubmitted = () => {
     };
 
     if (loading) {
-        return <div className="text-center">Loading...</div>;
+        return <div className='flex justify-center items-center text-center'>
+            <span className="loading loading-bars loading-lg  text-[#1D4EDE]"></span>
+
+        </div>;
     }
 
     if (error) {

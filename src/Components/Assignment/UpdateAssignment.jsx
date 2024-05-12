@@ -52,9 +52,9 @@ const UpdateAssignment = () => {
                 if (data.modifiedCount > 0) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Country Updated Successfully',
+                        text: 'Assignment Updated Successfully',
                         icon: 'success',
-                        confirmButtonText: 'Cool'
+                        confirmButtonText: 'OK'
                     });
                 }
             });
