@@ -1,0 +1,103 @@
+import { FiStar, FiMessageSquare, FiCheckCircle } from 'react-icons/fi';
+import { useLoaderData } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
+const GiveMark = () => {
+    const data = useLoaderData();
+    console.log(data._id)
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const result = form.result.value;
+        const feedback = form.feedback.value;
+        const updateAssignment = {
+            result: result,
+            feedback: feedback
+        };
+
+        console.log(updateAssignment);
+
+
+        fetch(`http://localhost:5000/submited/${data._id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updateAssignment)
+        })
+
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Country Updated Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    });
+                }
+            });
+
+    };
+
+    return (
+        <div className=" mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
+
+            <div className="my-10 p-6 bg-white shadow-2xl rounded-md">
+                <p className="text-center font-bold text-xl mb-4">Student Submitted</p>
+                <div className="mb-2">
+                    <p className="text-xl font-medium text-gray-700">PDF/DOC LINK: {data.pdfLink}</p>
+
+                </div>
+                <div>
+                    <p className="text-xl font-medium text-gray-700">Additional Notes: {data.additionalNotes}</p>
+                </div>
+
+            </div>
+
+            <h1 className="text-2xl font-bold mb-4 flex items-center">
+                <FiStar className="mr-2" /> Give Marks and Feedback
+            </h1>
+            <form onSubmit={handleSubmit} className="space-y-4">
+
+                <div>
+                    <label htmlFor="marks" className="text-sm font-medium text-gray-700 flex items-center">
+                        <FiStar className="mr-2" /> Marks
+                    </label>
+                    <input
+                        type="number"
+                        id="marks"
+                        name="result"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-lg border-gray-300 rounded-md px-4 py-2 border-2"
+                        required
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="feedback" className="text-sm font-medium text-gray-700 flex items-center">
+                        <FiMessageSquare className="mr-2" /> Feedback
+                    </label>
+                    <textarea
+                        id="feedback"
+                        name="feedback"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-lg border-gray-300 rounded-md px-4 py-2 border-2"
+                        rows={4}
+                        required
+                    ></textarea>
+                </div>
+                {/* Submit Button */}
+                <div>
+                    <button
+                        type="submit"
+                        className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 flex justify-center items-center"
+                    >
+                        <FiCheckCircle className="mr-2" /> Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    );
+};
+
+export default GiveMark;
