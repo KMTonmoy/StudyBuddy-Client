@@ -27,13 +27,14 @@ const Pending = () => {
 
     return (
         <div>
+
             {user && isAssignmentSubmitted() ? (
                 <div className='grid gap-5 grid-cols-1 md:grid-cols-3'>
                     {submissions.map(data => (
 
                         !data.feedback && (
                             <div key={data._id} className="bg-white rounded-lg shadow-md p-6">
-                                <img src={`${data.thumbnail}`} alt="" />
+                                <img className='w-full h-[220px]' src={`${data.thumbnail}`} alt="" />
                                 <h3 className="text-xl font-semibold mb-2">{data.title}</h3>
                                 <p className="text-gray-600 mb-4">Marks: {data.mark}</p>
                                 <p className="text-gray-600">Examinee: {data.name}</p>
@@ -42,6 +43,7 @@ const Pending = () => {
                                 </Link>
                             </div>
                         )
+
                     ))}
                 </div>
             ) : (

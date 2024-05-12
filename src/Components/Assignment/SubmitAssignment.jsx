@@ -20,6 +20,7 @@ const SubmitAssignment = () => {
         const description = data.description;
         const thumbnail = data.thumbnailURL;
         const name = user?.displayName;
+        const uid = user?.uid;
 
 
         const submitData = {
@@ -29,7 +30,8 @@ const SubmitAssignment = () => {
             title,
             description,
             name,
-            thumbnail
+            thumbnail,
+            uid
         };
 
         // Make API request to submit assignment data

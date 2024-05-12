@@ -11,6 +11,8 @@ import AssignmentPage from "../Components/AssignmentPage/AssignmentPAge";
 import Pending from "../Components/Pending/Pending";
 import UpdateAssignment from "../Components/Assignment/UpdateAssignment";
 import GiveMark from "../Components/GiveMark/GiveMark";
+import MySubmited from "../Components/AttemtedAssignmnet/MySubmited";
+import MySubmition from "../Components/MySubmition/MySubmition";
 
 
 
@@ -46,6 +48,19 @@ const router = createBrowserRouter([
                 element: <PrivateRoute><SubmitAssignment /></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/assignment/${params.id}`)
             },
+            {
+                path: "/mysubmition/:id",
+                element: <PrivateRoute><MySubmition /></PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/submited/${params.id}`)
+            },
+            {
+                path: "attempted-assignments",
+                element: <PrivateRoute><MySubmited /></PrivateRoute>,
+
+            },
+
+
+
 
             {
                 path: "/giveMark/:id",
@@ -70,10 +85,7 @@ const router = createBrowserRouter([
                 path: "/pending",
                 element: <PrivateRoute><Pending></Pending></PrivateRoute>
             },
-            {
-                path: "/attempted-assignments",
-                element: <Login />,
-            },
+
         ]
     },
 ]);
