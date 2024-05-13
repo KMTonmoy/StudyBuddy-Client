@@ -26,19 +26,19 @@ const Banner = () => {
                 <SwiperSlide>
                     <Slide
                         image={"https://t3.ftcdn.net/jpg/06/98/15/28/360_F_698152816_iofj0EaoJp6jjKsHkMSoAEawmbKg3at0.jpg"}
-                        text='Transform Your Group Study Sessions with GroupGrids Dynamic Features'
+                        text='Transform Your Group Study Sessions with StudyBuddys Dynamic Features'
                     />
                 </SwiperSlide>
                 <SwiperSlide>
                     <Slide
                         image={"https://www.euroschoolindia.com/wp-content/uploads/2023/07/student-study-group.jpg"}
-                        text='Connect and Collaborate Effortlessly on GroupGrid'
+                        text='Connect and Collaborate Effortlessly on StudyBuddy'
                     />
                 </SwiperSlide>
                 <SwiperSlide>
                     <Slide
                         image={"https://www.eurokidsindia.com/blog/wp-content/uploads/2023/07/group-study.jpg"}
-                        text='Achieve Academic Success Together on GroupGrid'
+                        text='Achieve Academic Success Together on StudyBuddy'
                     />
                 </SwiperSlide>
             </Swiper>

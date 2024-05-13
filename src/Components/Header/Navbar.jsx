@@ -56,7 +56,7 @@ const Navbar = () => {
                     </div>
                     <Link to='/' className='capitalize font-semibold flex gap-2 items-center'>
                         <img className='w-[50px] rounded-full' src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsDrAoBLTtWUpakNVQwswakTQ2IKmS_x6IVUPK1oP65Q&s'} alt='' />
-                        <span className='font-bold'>GROUPGRID</span>
+                        <span className='font-bold'>StudyBuddy</span>
                     </Link>
                 </div>
                 <div className="navbar-center  hidden lg:flex">

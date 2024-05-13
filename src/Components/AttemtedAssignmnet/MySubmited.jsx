@@ -48,7 +48,7 @@ const MySubmitted = () => {
     return (
         <div className="container mx-auto mt-8">
             <Helmet>
-                <title>GroupGrid | MySubmited</title>
+                <title>StudyBuddy | MySubmited</title>
             </Helmet>
             <h2 className="text-3xl font-semibold text-center mb-4">My Submitted Assignments</h2>
             {user && isAssignmentSubmitted() ? (

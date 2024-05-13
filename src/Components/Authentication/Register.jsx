@@ -61,7 +61,7 @@ const Register = () => {
   return (
     <div className='flex justify-center items-center min-h-screen'>
       <Helmet>
-        <title>GroupGrid | Register</title>
+        <title>StudyBuddy | Register</title>
       </Helmet>
       <div className='flex flex-col-reverse w-full max-w-3xl mx-auto overflow-hidden bg-white rounded-lg shadow-lg lg:flex-row lg:max-w-4xl'>
         <form onSubmit={handleRegister} className='w-full px-6 py-8 md:px-8 lg:w-1/2'>

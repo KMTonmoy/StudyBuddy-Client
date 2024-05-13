@@ -62,7 +62,7 @@ const CreateAssignment = () => {
     return (
         <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
             <Helmet>
-                <title>GroupGrid | Create Assignment</title>
+                <title>StudyBuddy | Create Assignment</title>
             </Helmet>
             <h1 className="text-2xl font-bold mb-4 flex items-center">
                 <FiEdit2 className="mr-2" /> Create New Assignment

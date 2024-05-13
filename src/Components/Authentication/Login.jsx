@@ -49,7 +49,7 @@ const Login = () => {
   return (
     <div className='flex justify-center items-center min-h-[calc(100vh-306px)] my-12'>
       <Helmet>
-        <title>GroupGrid | Login</title>
+        <title>StudyBuddy | Login</title>
       </Helmet>
       <div className='flex flex-col-reverse w-full max-w-3xl mx-auto overflow-hidden bg-white rounded-lg shadow-lg lg:flex-row lg:max-w-4xl'>
         <div className='w-full px-6 py-8 md:px-8 lg:w-1/2'>

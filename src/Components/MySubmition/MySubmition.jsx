@@ -7,7 +7,7 @@ const MySubmition = () => {
     return (
         <div>
             <Helmet>
-                <title>GroupGrid | My Submition</title>
+                <title>StudyBuddy | My Submition</title>
             </Helmet>
             <div className="max-w-lg mx-auto mt-[100px]">
                 <div className="bg-white rounded-lg shadow-md overflow-hidden">

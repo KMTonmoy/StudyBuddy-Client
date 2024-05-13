@@ -34,7 +34,7 @@ const Pending = () => {
     return (
         <div>
             <Helmet>
-                <title>GroupGrid | Pending</title>
+                <title>StudyBuddy | Pending</title>
             </Helmet>
             {user ? (
                 <div className='grid gap-5 grid-cols-1 md:grid-cols-3'>

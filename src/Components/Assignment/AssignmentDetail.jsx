@@ -14,7 +14,7 @@ const AssignmentDetail = () => {
     return (
         <div className="max-w-4xl mx-auto px-4 py-8 capitalize">
             <Helmet>
-                <title>GroupGrid | Assignment Detail</title>
+                <title>StudyBuddy | Assignment Detail</title>
             </Helmet>
             {assignment ? (
                 <div className="bg-white shadow-lg rounded-lg overflow-hidden">
