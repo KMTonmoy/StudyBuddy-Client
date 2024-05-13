@@ -29,8 +29,10 @@ const MySubmitted = () => {
     }, []);
 
     const isAssignmentSubmitted = () => {
-        return submissions.some(submission => submission.uid === user.uid);
+        return submissions.some(submission => submission.email === user.email);
     };
+
+
 
     if (loading) {
         return <div className='flex justify-center items-center text-center'>
@@ -53,11 +55,27 @@ const MySubmitted = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {submissions.map(submission => (
                         <div key={submission._id} className={`  rounded-lg shadow-md p-6`}>
-                            <img src={submission.thumbnail} alt={submission.title} className="w-full h-40 object-cover mb-4 rounded-md" />
+                            <img src={submission.thumbnail} alt={submission.title} className="w-full h-[300px] object-cover mb-4 rounded-md" />
                             <h3 className="text-xl font-semibold mb-2">{submission.title}</h3>
                             <p className="text-gray-600 text-xl">Total Marks: {submission.mark}</p>
-                            <p className="text-gray-600 text-xl mb-2">You'r Result: {submission.result ? submission.result : "Pending"}</p>
-                            <p className="text-gray-600 text-xl mb-2">Feedback: {submission.feedback ? submission.feedback : "Pending"}</p>
+                            {/* <p className="text-gray-600 text-xl mb-2">You'r Result: {submission.result ? submission.result : "Pending"}</p> */}
+
+                            <div className='mt-5'>
+                                {
+                                    submission.result ? (<p className="text-gray-600 text-xl mb-2">You'r Result: {submission.result}</p>) : (
+                                        null
+                                    )
+                                }
+
+                            </div>
+                            {/* <p className="text-gray-600 text-xl mb-2">Feedback: {submission.feedback ? submission.feedback : "Pending"}</p> */}
+
+                            {
+                                submission.feedback ? (<p className="text-gray-600 text-xl mb-2">Feedback: {submission.feedback}</p>) : (
+                                    null
+                                )
+                            }
+
                             <p className='text-xl'>
                                 Status: <span className={`text-gray-600 text-xl mb-2 ${submission.feedback ? "bg-green-200 px-2 rounded-3xl" : "bg-red-200 px-2 rounded-3xl"}`}>{submission.feedback ? "Compleate" : "Pending"}</span>
                             </p>

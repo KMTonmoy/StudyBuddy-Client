@@ -16,7 +16,7 @@ const UpdateAssignment = () => {
         dueDate,
         marks
     } = data;
-    console.log(_id)
+    //console.log(_id)
     const handleUpdate = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -36,7 +36,7 @@ const UpdateAssignment = () => {
             dueDate
         };
 
-        console.log(updateAssignment);
+        //console.log(updateAssignment);
 
 
         fetch(`https://group-grid-server.vercel.app/assignment/${_id}`, {
@@ -49,7 +49,7 @@ const UpdateAssignment = () => {
 
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 if (data.modifiedCount > 0) {
                     Swal.fire({
                         title: 'Success!',
@@ -66,7 +66,7 @@ const UpdateAssignment = () => {
     };
 
 
-    console.log(title)
+    //console.log(title)
 
 
 

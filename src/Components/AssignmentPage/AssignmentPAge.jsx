@@ -3,14 +3,12 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import { Helmet } from 'react-helmet';
 
 
 const AssignmentPage = () => {
     const { user, loading, setLoading } = useContext(AuthContext);
     const [difficultyFilter, setDifficultyFilter] = useState('All');
     const [assignments, setAssignments] = useState([]);
-
 
     useEffect(() => {
         const fetchAssignments = async () => {
@@ -41,6 +39,14 @@ const AssignmentPage = () => {
         }
     };
 
+    const handleDeleteError = () => {
+        Swal.fire(
+            'Deleted!',
+            'This assignment was not created by you, so you cannot delete it.',
+            'error'
+        );
+    };
+
     const renderDescription = (assignment) => {
         const words = assignment.description.trim().split(/\s+/);
         const maxWordsToShow = 25;
@@ -51,9 +57,6 @@ const AssignmentPage = () => {
             const truncatedDescription = words.slice(0, maxWordsToShow).join(' ');
             return (
                 <>
-                    <Helmet>
-                        <title>GroupGrid | All Assignment</title>
-                    </Helmet>
                     <p className="text-gray-600">{truncatedDescription}</p>
                     <Link to={`/assignment/${assignment._id}`} className="text-blue-500 hover:underline">Show Details</Link>
                 </>
@@ -89,15 +92,10 @@ const AssignmentPage = () => {
                     <option value="Medium">Medium</option>
                     <option value="Hard">Hard</option>
                 </select>
-
-
-
-
             </div>
             {loading ? (
                 <div className='flex justify-center items-center text-center'>
                     <span className="loading loading-bars loading-lg  text-[#1D4EDE]"></span>
-
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -124,13 +122,21 @@ const AssignmentPage = () => {
                                         </div>
                                         {user && user.uid === assignment.uid ? (
                                             <div className="bg-gray-100 p-4 flex justify-end">
+                                                <button onClick={() => handleDelete(assignment._id)} className="text-red-500 hover:text-red-700 font-semibold mr-2">Delete</button>
+
                                                 <Link to={`/update/${assignment._id}`}>
                                                     <button className="text-blue-500 hover:text-blue-700 font-semibold mr-2">Update</button>
                                                 </Link>
-                                                <button onClick={() => handleDelete(assignment._id)} className="text-red-500 hover:text-red-700 font-semibold">Delete</button>
+                                                <Link to={`/assignment/${assignment._id}`}>
+                                                    <button className="text-blue-500 hover:text-blue-700 font-semibold">View Assignment</button>
+                                                </Link>
                                             </div>
                                         ) : (
-                                            <div className="bg-gray-100 p-4 flex justify-end">
+                                            <div className="bg-gray-100 p-4 flex justify-end gap-2">
+                                                <button onClick={handleDeleteError} className="text-red-500 hover:text-red-700 font-semibold">Delete</button>
+                                                <Link to={`/update/${assignment._id}`}>
+                                                    <button className="text-blue-500 hover:text-blue-700 font-semibold mr-2">Update</button>
+                                                </Link>
                                                 <Link to={`/assignment/${assignment._id}`}>
                                                     <button className="text-blue-500 hover:text-blue-700 font-semibold">View Assignment</button>
                                                 </Link>

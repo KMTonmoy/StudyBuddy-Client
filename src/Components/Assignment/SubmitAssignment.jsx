@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 import { useLoaderData } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 
 const SubmitAssignment = () => {
     const { user } = useContext(AuthContext);
@@ -22,6 +21,7 @@ const SubmitAssignment = () => {
         const thumbnail = data.thumbnailURL;
         const name = user?.displayName;
         const uid = user?.uid;
+        const email = user?.email;
 
 
         const submitData = {
@@ -32,7 +32,9 @@ const SubmitAssignment = () => {
             description,
             name,
             thumbnail,
-            uid
+            uid,
+            email,
+            status: "Pending"
         };
 
         // Make API request to submit assignment data
@@ -51,7 +53,7 @@ const SubmitAssignment = () => {
                     'Your Assignment has been Submited.',
                     'success'
                 );
-                console.log(submitData)
+                //console.log(submitData)
                 form.reset()
             })
             .catch(error => {
@@ -59,14 +61,11 @@ const SubmitAssignment = () => {
             });
     };
 
-    // console.log(user.displayName)
+    // //console.log(user.displayName)
 
 
     return (
         <div className="max-w-lg mx-auto mt-[100px]">
-            <Helmet>
-                <title>GroupGrid | SubmitAssignment</title>
-            </Helmet>
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="bg-blue-500 text-white py-4 px-6">
                     <h2 className="text-3xl font-bold">Submit Assignment</h2>

@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet';
 import { FiStar, FiMessageSquare, FiCheckCircle } from 'react-icons/fi';
 import { useLoaderData } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -12,9 +11,12 @@ const GiveMark = () => {
         const form = e.target
         const result = form.result.value
         const feedback = form.feedback.value
+        const status = "Compleat"
+
         const giveMark = {
             result: result,
-            feedback: feedback
+            feedback: feedback,
+            status: status
         }
 
         fetch(`https://group-grid-server.vercel.app/submited/${data._id}`, {
@@ -27,11 +29,11 @@ const GiveMark = () => {
 
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 if (data.modifiedCount > 0) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Country Updated Successfully',
+                        text: 'Assignment Updated Successfully',
                         icon: 'success',
                         confirmButtonText: 'Cool'
                     });
@@ -39,16 +41,14 @@ const GiveMark = () => {
             });
 
 
-        console.log(giveMark);
+        //console.log(giveMark);
 
 
     };
 
     return (
         <div className=" mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
-            <Helmet>
-                <title>GroupGrid | GiveMark</title>
-            </Helmet>
+
             <div className="my-10 p-6 bg-white shadow-2xl rounded-md">
                 <p className="text-center font-bold text-xl mb-4">Student Submitted</p>
                 <div>
@@ -62,12 +62,15 @@ const GiveMark = () => {
                         type='application/pdf'
                     ></iframe>
                 </div>
-                <div className="mb-2 mt-5">
+                <div className="mb-2 mt-5 ">
                     <p className="text-base font-medium text-gray-700">PDF/DOC LINK: <a className='text-blue-400' href={data.pdfLink}>{data.pdfLink}</a></p>
+
+                    <p className="text-base font-medium mt-2 text-gray-700">Assignment Mark: {data.mark}  </p>
+                    <p className="text-base font-medium mt-2 text-gray-700">Examinee: {data.name}  </p>
 
                 </div>
                 <div>
-                    <p className="text-base mt-5 font-medium text-gray-700">Additional Notes: {data.additionalNotes}</p>
+                    <p className="text-base mt-2 font-medium text-gray-700">Additional Notes: {data.additionalNotes}</p>
                 </div>
 
             </div>

@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet';
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
+  //console.log(location);
   const { signIn, signInWithGoogle, user, loading } = useContext(AuthContext);
   const destination = location.state?.from || '/';
 
@@ -26,6 +26,7 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithGoogle();
+
       navigate(destination);
     } catch (err) {
       toast.error(err?.message);
