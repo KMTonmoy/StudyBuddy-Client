@@ -41,8 +41,7 @@ const GiveMark = () => {
             });
 
 
-        //console.log(giveMark);
-
+        form.reset()
 
     };
 
