@@ -19,17 +19,10 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = async (email, password) => {
-    setLoading(true);
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-      console.error('Error creating user:', error);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  };
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password)
+  }
+
 
   const signIn = async (email, password) => {
     setLoading(true);

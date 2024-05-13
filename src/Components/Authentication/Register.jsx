@@ -2,25 +2,18 @@ import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-import toast from 'react-hot-toast';
-import { ToastContainer } from 'react-toastify';
-import { updateProfile } from 'firebase/auth';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet';
+import { updateProfile } from 'firebase/auth';
+
 
 const Register = () => {
-  const navigate = useNavigate();
-  const { createUser, updateUserProfile } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
-
+  const { createUser, googleLogin, gitHubLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
-  const notify = () => toast("Register Success Fully");
-
-
-
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -37,26 +30,31 @@ const Register = () => {
 
       const result = await createUser(email, password, name, imageUrl);
       const loggedUser = result.user;
-      toast.success("User created successfully.");
+
 
       updateProfile(loggedUser, {
         displayName: name,
         photoURL: imageUrl
       });
-      notify()
+
+      Swal.fire(
+        'Profile Created',
+        'Profile Created Successfully',
+        'success'
+      );
+
       setTimeout(() => {
         navigate('/');
       }, 5000);
-
-
     } catch (error) {
       Swal.fire(
         'Error',
-        `${error}`,
-        'Error'
+        error.message,
+        'error'
       );
     }
   };
+
 
   return (
     <div className='flex justify-center items-center min-h-screen'>
@@ -71,7 +69,7 @@ const Register = () => {
               Name
             </label>
             <input
-              id='name'
+              // id='name'
               autoComplete='name'
               name='name'
               type='text'
@@ -123,7 +121,7 @@ const Register = () => {
               Image URL
             </label>
             <input
-              id='imageUrl'
+              // id='imageUrl'
               autoComplete='url'
               name='imageUrl'
               type='text'
@@ -151,7 +149,7 @@ const Register = () => {
           alt='Register Image'
         />
       </div>
-      <ToastContainer></ToastContainer>
+
     </div>
   );
 };
