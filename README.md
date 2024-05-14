@@ -14,7 +14,7 @@ StudyBuddy is a web application designed for online group study, enabling users 
 
 ## Live Site
 
-Check out the live site [here](https://assignment-11-75185.web.app/).
+Check out the live site [here](https://assignment11tonmoy.netlify.app/).
 
 ## Technologies Used
 
@@ -23,7 +23,7 @@ Check out the live site [here](https://assignment-11-75185.web.app/).
 - React
 - TailwindCss
 - DaisyUi
-- JSON Web Token (JWT)
+
 
 ## Packages Used
 
